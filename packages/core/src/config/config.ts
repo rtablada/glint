@@ -12,6 +12,7 @@ export class GlintConfig {
   public readonly configPath: string;
   public readonly environment: GlintEnvironment;
   public readonly checkStandaloneTemplates: boolean;
+  public readonly experimentalAnalyzeJs?: boolean
 
   private extensions: Array<string>;
 
@@ -24,6 +25,7 @@ export class GlintConfig {
     this.configPath = normalizePath(configPath);
     this.rootDir = path.dirname(configPath);
     this.environment = GlintEnvironment.load(config.environment, { rootDir: this.rootDir });
+    this.experimentalAnalyzeJs = config.experimentalAnalyzeJs;
     this.checkStandaloneTemplates = config.checkStandaloneTemplates ?? true;
     this.extensions = this.environment.getConfiguredFileExtensions();
   }

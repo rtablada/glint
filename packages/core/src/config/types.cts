@@ -6,6 +6,7 @@ import type * as ts from 'typescript';
 type TSLib = typeof ts;
 
 export type GlintConfigInput = {
+  experimentalAnalyzeJs?: boolean;
   environment: string | Array<string> | Record<string, unknown>;
   checkStandaloneTemplates?: boolean;
 };

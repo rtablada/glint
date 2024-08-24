@@ -71,6 +71,14 @@ export default class DocumentCache {
       ? environment.getPossibleScriptPaths(path)
       : environment.getPossibleTemplatePaths(path);
 
+    if (this.glintConfig.experimentalAnalyzeJs && environment.isTemplate(path)) {
+      if (candidates.some(({ path }) => path.endsWith('.js') && this.documentExists(path))) {
+        let synth =  this.glintConfig.getSynthesizedScriptPathForTS(path);
+
+        return synth;
+      }
+    }
+
     for (let { path, deferTo } of candidates) {
       // If a candidate companion exist and no other module that would claim that
       // companion with a higher priority exists, we've found our winner.
