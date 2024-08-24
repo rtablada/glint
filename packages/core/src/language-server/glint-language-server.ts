@@ -757,13 +757,16 @@ export default class GlintLanguageServer {
     };
   }
 
+  get allowJs(): boolean {
+    return this.service.getProgram()?.getCompilerOptions().allowJs ?? false;
+  }
+
   private isAnalyzableFile(synthesizedScriptPath: string): boolean {
     if (synthesizedScriptPath.endsWith('.ts')) {
       return true;
     }
 
-    let allowJs = this.service.getProgram()?.getCompilerOptions().allowJs ?? false;
-    if (allowJs && synthesizedScriptPath.endsWith('.js')) {
+    if (this.allowJs && synthesizedScriptPath.endsWith('.js')) {
       return true;
     }
 
