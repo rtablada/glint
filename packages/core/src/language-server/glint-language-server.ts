@@ -758,7 +758,11 @@ export default class GlintLanguageServer {
   }
 
   get allowJs(): boolean {
-    return this.service.getProgram()?.getCompilerOptions().allowJs ?? false;
+    if (this.glintConfig.alwaysIgnoreJs === true)  {
+      return false;
+    }
+
+    return  this.service.getProgram()?.getCompilerOptions().allowJs ?? false;
   }
 
   private isAnalyzableFile(synthesizedScriptPath: string): boolean {

@@ -12,6 +12,7 @@ export class GlintConfig {
   public readonly configPath: string;
   public readonly environment: GlintEnvironment;
   public readonly checkStandaloneTemplates: boolean;
+  private readonly alwaysIgnoreJs: boolean;
 
   private extensions: Array<string>;
 
@@ -25,6 +26,7 @@ export class GlintConfig {
     this.rootDir = path.dirname(configPath);
     this.environment = GlintEnvironment.load(config.environment, { rootDir: this.rootDir });
     this.checkStandaloneTemplates = config.checkStandaloneTemplates ?? true;
+    this.alwaysIgnoreJs = config.modeForTemplatesWithJs === 'ignore';
     this.extensions = this.environment.getConfiguredFileExtensions();
   }
 
